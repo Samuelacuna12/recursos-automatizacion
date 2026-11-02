@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {parseCSV,analyze,exampleCSV,exportCSV,dateValue} from '../seguimiento/core.mjs';
+test('La muestra produce seis decisiones diferentes y conserva todas las filas',()=>{const r=analyze(parseCSV(exampleCSV('2026-11-02')),'2026-11-02');assert.equal(r.length,6);assert.deepEqual(new Set(r.map(x=>x.status)),new Set(['vencida','hoy','agendada','definir','excluir','cerrada']));});
+test('Baja prevalece sobre fecha vencida e ID duplicado',()=>{const a=parseCSV(exampleCSV('2026-11-02'));a[4].id=a[0].id;const r=analyze(a,'2026-11-02');assert.equal(r.find(x=>x.no_contactar==='si').status,'excluir');assert.equal(r.find(x=>x.empresa==='Tienda Ejemplo A').status,'revisar');});
+test('Fechas imposibles y futuras no generan una acción habilitada',()=>{assert.equal(dateValue('2026-02-30'),null);const a=parseCSV(exampleCSV('2026-11-02'));a[0].ultima_interaccion='2026-11-03';assert.equal(analyze(a,'2026-11-02').find(x=>x.id==='EJ-01').status,'revisar');});
+test('CSV admite punto y coma, comillas escapadas y saltos dentro de celda',()=>{const h='id;empresa;etapa;ultima_interaccion;proxima_accion;no_contactar\n';const r=parseCSV(h+'X;"Empresa; ""Ejemplo""\nLocal";nuevo;2026-11-01;;no');assert.equal(r[0].empresa,'Empresa; "Ejemplo"\nLocal');});
+test('CSV rechaza columnas inconsistentes y comillas abiertas',()=>{assert.throws(()=>parseCSV('id,empresa\n1,x'),/Faltan/);assert.throws(()=>parseCSV(exampleCSV('2026-11-02')+'\n"x'),/cerrar/);});
+test('Exportación neutraliza fórmulas de hoja y conserva bajas',()=>{let r=analyze(parseCSV(exampleCSV('2026-11-02')),'2026-11-02');r[0].empresa='=1+1';const csv=exportCSV(r);assert.match(csv,/'=1\+1/);assert.match(csv,/No contactar/);assert.equal(parseCSV(csv).length,6);});
+
+test('La plantilla rechaza fecha vacía o imposible',()=>{assert.throws(()=>exampleCSV(''),/válida/);assert.throws(()=>exampleCSV('2026-02-30'),/válida/);});

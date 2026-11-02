@@ -1,0 +1,7 @@
+id,empresa,etapa,ultima_interaccion,proxima_accion,no_contactar
+EJ-01,Tienda Ejemplo A,cotizado,2026-10-25,2026-10-30,no
+EJ-02,Taller Ejemplo B,en_negociacion,2026-10-31,2026-11-02,no
+EJ-03,Marca Ejemplo C,cotizado,2026-10-30,2026-11-05,no
+EJ-04,Distribuidor Ejemplo D,nuevo,2026-11-01,,no
+EJ-05,Negocio Ejemplo E,cotizado,2026-10-26,2026-11-01,si
+EJ-06,Comercio Ejemplo F,ganado,2026-10-31,,no
