@@ -1,0 +1,7 @@
+caso,monto,esperado
+inferior,99999,normal
+limite,100000,revisar
+superior,100001,revisar
+vacio,,pedir_dato
+negativo,-1,dato_invalido
+texto,abc,dato_invalido

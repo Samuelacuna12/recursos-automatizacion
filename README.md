@@ -2,6 +2,12 @@
 
 Herramientas, skills y guías para convertir procesos comerciales en operaciones revisables.
 
+## Probar reglas operativas
+
+[Abrir la skill y sus instrucciones](skills/probar-reglas-operativas/SKILL.md) · [Seis casos ficticios en CSV](skills/probar-reglas-operativas/assets/casos.csv) · [Ejemplo ejecutable en Python](skills/probar-reglas-operativas/scripts/probar_ejemplo.py)
+
+Prepara pruebas de límites, datos vacíos e inválidos y registra la evidencia. Incluye un ejemplo que se puede ejecutar localmente con Python 3, sin dependencias ni conexiones. Probar ese ejemplo no prueba tu bot: la guía distingue explícitamente ejecución real, simulación y casos pendientes. Los archivos se pueden leer y descargar directamente desde GitHub.
+
 ## Mesa de seguimiento
 
 [Usar la herramienta](https://samuelacuna12.github.io/recursos-automatizacion/) · [Guía PDF](downloads/guia-seguimiento.pdf) · [Skill descargable](downloads/seguimiento-cotizaciones.zip)
